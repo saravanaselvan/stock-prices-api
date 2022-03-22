@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
+from flask_cors import CORS
 
 from db import db
 from resources.calc import Calc
@@ -11,6 +12,7 @@ from resources.auth import Login
 from resources.user import UserRegister
 
 app = Flask(__name__)
+CORS(app)
 uri = os.environ.get(
     'DATABASE_URL', 'test.db')
 if uri.startswith("postgres://"):
