@@ -22,11 +22,11 @@ api = Api(app)
 
 jwt = JWTManager(app)
 
-api.add_resource(Calc, '/calc')
-api.add_resource(UploadedStocks, '/uploaded_stocks')
-api.add_resource(UserRegister, '/register')
-api.add_resource(DownloadResult, '/download_result/<int:id>')
-api.add_resource(Login, '/login')
+api.add_resource(Calc, '/api/calc')
+api.add_resource(UploadedStocks, '/api/uploaded_stocks')
+api.add_resource(UserRegister, '/api/register')
+api.add_resource(DownloadResult, '/api/download_result/<int:id>')
+api.add_resource(Login, '/api/login')
 
 if __name__ == "__main__":
     db.init_app(app)
