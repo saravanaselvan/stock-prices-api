@@ -7,15 +7,17 @@ class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255))
     email = db.Column(db.String(255))
     password = db.Column(db.String(300))
 
-    def __init__(self, email, password):
+    def __init__(self, username, email, password):
+        self.username = username
         self.email = email
         self.password = generate_password_hash(password, salt_length=8)
 
     def json(self):
-        return {'id': self.id, 'email': self.email}
+        return {'id': self.id, 'username': self.username, 'email': self.email}
 
     @classmethod
     def find_by_email(cls, email):

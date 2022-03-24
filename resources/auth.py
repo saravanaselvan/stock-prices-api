@@ -15,6 +15,6 @@ class Login(Resource):
 
         if user:
             access_token = create_access_token(identity=user.id)
-            return jsonify(access_token=access_token)
+            return {'user_info': {'userName': user.username, 'email': user.email, 'accessToken': access_token}}
 
         return {"message": "Invalid credentials"}, 401

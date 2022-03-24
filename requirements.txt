@@ -2,7 +2,9 @@ Flask
 Flask-RESTful
 Flask-JWT-Extended
 Flask-SQLAlchemy
+Flask-Migrate
 uwsgi
 psycopg2
 flask-cors
 python-dotenv
+pymysql

@@ -63,5 +63,9 @@ class Calc(Resource):
             "id": priceFile.id,
             "created_at": str(priceFile.created_at),
             "original_uploaded_file_name": priceFile.original_uploaded_file_name,
-            "output_file_name": priceFile.output_file_name
+            "output_file_name": priceFile.output_file_name,
+            "begin_date": str(priceFile.begin_date.strftime("%d-%m-%Y")),
+            "end_date": str(priceFile.end_date.strftime("%d-%m-%Y")),
+            "sum": total,
+            "average": avg
         }

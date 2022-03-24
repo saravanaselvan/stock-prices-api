@@ -1,12 +1,15 @@
 from flask_restful import Resource, reqparse
 
 from models.user import UserModel
+from flask_jwt_extended import create_access_token
 
 
 class UserRegister(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('email', type=str, required=True,
                         help="Email required")
+    parser.add_argument('username', type=str, required=True,
+                        help="Username required")
     parser.add_argument('password', type=str, required=True,
                         help="Password required")
 
@@ -20,7 +23,8 @@ class UserRegister(Resource):
 
         user.save_to_db()
 
-        return {"message": "User created successfully."}, 201
+        access_token = create_access_token(identity=user.id)
+        return {'user_info': {'userName': user.username, 'email': user.email, 'accessToken': access_token}}, 201
 
 
 class UserList(Resource):

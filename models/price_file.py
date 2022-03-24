@@ -55,8 +55,8 @@ class PriceFile(db.Model):
             'uploaded_file_name': self.uploaded_file_name,
             'output_file_path': self.output_file_path,
             'output_file_name': self.output_file_name,
-            'begin_date': str(self.begin_date),
-            'end_date': str(self.end_date),
+            'begin_date': str(self.begin_date.strftime("%d-%m-%Y")),
+            'end_date': str(self.end_date.strftime("%d-%m-%Y")),
             'sum': self.sum,
             'average': self.average,
             'created_at': str(self.created_at)
