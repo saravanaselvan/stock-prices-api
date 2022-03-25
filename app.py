@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
@@ -22,7 +23,21 @@ uri = os.environ.get(
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=4)
 app.config.from_pyfile('config.py')
+
+UPLOAD_FOLDER = os.environ.get(
+    'UPLOAD_FOLDER', 'private/input_price_files')
+OUTPUT_FOLDER = os.environ.get(
+    'OUTPUT_FOLDER', 'private/output_price_files')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
+
+upload_dir = os.path.join(UPLOAD_FOLDER)
+os.makedirs(upload_dir, exist_ok=True)
+output_dir = os.path.join(OUTPUT_FOLDER)
+os.makedirs(output_dir, exist_ok=True)
+
 api = Api(app)
 
 jwt = JWTManager(app)

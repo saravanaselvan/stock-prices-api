@@ -61,3 +61,7 @@ class PriceFile(db.Model):
             'average': self.average,
             'created_at': str(self.created_at)
         }
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
